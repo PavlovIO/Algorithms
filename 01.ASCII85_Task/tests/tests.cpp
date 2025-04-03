@@ -1,7 +1,7 @@
 /* Ilya Pavlov st129535@student.spbu.ru
 	Lab-work-2
 */
-#include "libraries.hpp"
+#include "libraries.h"
 #include<gtest/gtest.h>
 
 std::string Testing(const std::string& s) {
