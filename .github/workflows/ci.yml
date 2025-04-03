@@ -69,4 +69,4 @@ jobs:
       - name: Тестируем программу
         run: |
           cd ${{ matrix.exercise }}
-          make run
+          make runtest

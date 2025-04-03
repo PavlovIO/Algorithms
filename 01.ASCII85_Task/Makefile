@@ -33,7 +33,7 @@ $(PREF_OBJ)%.o: $(PREF_SRC)%.cpp | $(PREF_OBJ)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Сборка и запуск тестов
-test: $(TARGET_TST)
+build: $(TARGET_TST)
 
 $(TARGET_TST): $(OBJ) $(TST_OBJ)
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
