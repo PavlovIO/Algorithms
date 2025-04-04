@@ -7,19 +7,26 @@ LDFLAGS = -lgtest -lgtest_main -pthread
 PREF_SRC = ./src/
 PREF_OBJ = ./obj/
 PREF_TST = ./tests/
+PREF_SH = ./
 
 # Списки всех файлов
 SRC = $(wildcard $(PREF_SRC)*.cpp)                             # Исходные файлы
 OBJ = $(patsubst $(PREF_SRC)%.cpp, $(PREF_OBJ)%.o, $(SRC))     # Объектные файлы
 TST = $(wildcard $(PREF_TST)*.cpp)                             # Файлы тестов
 TST_OBJ = $(patsubst $(PREF_TST)%.cpp, $(PREF_OBJ)%.o, $(TST)) # Объектные файлы тестов
+SH = $(wildcard $(PREF_SH)*.sh)                                # Скрипты
 
 # Исполняемые файлы
 TARGET = output
 TARGET_TST = output_tst
 
+
 # Цель по умолчанию
-all: $(TARGET)
+all: setup $(TARGET)
+
+# Подключение скриптов
+setup:
+	if [ -n "$(SH)" ]; then chmod +x $(SH); fi
 
 # Создание папки для объектных файлов
 $(PREF_OBJ):
@@ -35,7 +42,7 @@ $(PREF_OBJ)%.o: $(PREF_SRC)%.cpp | $(PREF_OBJ)
 # Сборка и запуск тестов
 build: $(TARGET_TST)
 
-$(TARGET_TST): $(OBJ) $(TST_OBJ)
+$(TARGET_TST): $(filter-out $(PREF_OBJ)main.o, $(OBJ)) $(TST_OBJ)
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
 
 $(PREF_OBJ)%.o: $(PREF_TST)%.cpp | $(PREF_OBJ)
@@ -61,4 +68,4 @@ format:
 	find src/ -name '*.cpp' -exec astyle --options=style.astylerc {} \;
 	find tests/ -name '*.cpp' -exec astyle --options=style.astylerc {} \;
 
-.PHONY: all test clean cleanall run runtest format
+.PHONY: all setup test clean cleanall run runtest format
