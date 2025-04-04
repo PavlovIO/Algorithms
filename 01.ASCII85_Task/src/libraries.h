@@ -5,7 +5,6 @@
 #define LIBRARIES_H
 #include <iostream>
 #include <string>
-#include <iostream>
 #include <vector>
 #include <stdexcept>
 #include <cstdint>

@@ -31,10 +31,12 @@ int main( int argc, char* argv[])
     //Encode/decode process     
     if (decodeMode)
     {
-        std::cout<<"WIP"<<std::end;
+        decoder_ascii_85(std::cin, std::cout);
+        std::cout<<"\n";
     } else
     {
-        std::cout<<"WIP"<<std::end;
+        encoder_ascii_85(std::cin, std::cout);
+        std::cout<<"\n";
     }
     
     return 0;

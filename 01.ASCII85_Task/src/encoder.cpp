@@ -3,7 +3,7 @@
 */
 #include "ascii85.h"
 
-void encoder_ascii_85(std::istream &input, std::ostream &output)
+int encoder_ascii_85(std::istream &input, std::ostream &output)
 {
     const uint32_t powers[] = {1, 85, 85*85, 85*85*85, 85*85*85*85};
     std::vector<char> outputData;
@@ -28,7 +28,7 @@ void encoder_ascii_85(std::istream &input, std::ostream &output)
     if (!buffer.empty())
     {
         int s = buffer.size();
-        for (i=0; i + s < 4; ++i)
+        for (int i=0; i + s < 4; ++i)
         {
             buffer.push_back(static_cast<unsigned char>(0));
         }
@@ -41,5 +41,6 @@ void encoder_ascii_85(std::istream &input, std::ostream &output)
         }
     }
     output.write(outputData.data(), outputData.size());
-    output << "~>";    
+    output << "~>";  
+    return 0;  
 }

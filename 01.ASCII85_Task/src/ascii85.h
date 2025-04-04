@@ -4,8 +4,8 @@
 #ifndef ASCII85_H
 #define ASCII85_H
 #include "libraries.h"
-void encoder_ascii_85(std::istream &input, std::ostream &output);
-void decoder_ascii_85(std::istream &input, std::ostream &output);
 
+int encoder_ascii_85(std::istream &input, std::ostream &output);
+int decoder_ascii_85(std::istream &input, std::ostream &output);
 
 #endif
