@@ -22,7 +22,7 @@ TARGET_TST = output_tst
 
 
 # Цель по умолчанию
-all: setup $(TARGET)
+all: setup $(TARGET) clean
 
 # Подключение скриптов
 setup:
