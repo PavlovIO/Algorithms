@@ -6,38 +6,43 @@
 int main( int argc, char* argv[])
 {
     //Checking for input
+    if (argc != 3) {
+        std::cerr << "Usage: " << argv[0] << " [-e (encode) | -d (decode)] <string>" << std::endl;
+        return 1;
+    }
+    
+    // Determine mode and input string
+    std::string mode = argv[1];
+    std::string input_str = argv[2];
     bool decodeMode = false;
-    if (argc > 1)
-    {
-        std::string arg = argv[1];
-        if (arg == "-d")
-        {
-            decodeMode = true;
-        } else if (arg == "-e")
-        {
-            decodeMode = false;
-        } else
-        {
-            std::cerr<<"Usage: "<<argv[0]<<" [-e (encode)] | [-d (decode)]"<<std::endl;
+
+    if (mode == "-d") {
+        decodeMode = true;
+    } else if (mode == "-e") {
+        decodeMode = false;
+    } else {
+        std::cerr << "Usage: " << argv[0] << " [-e (encode) | -d (decode)] <string>" << std::endl;
+        return 1;
+    }
+    
+    // Use stringstream for input and output
+    std::stringstream input(input_str);
+    std::stringstream output;
+
+
+    // Encode or decode based on mode
+    if (decodeMode) {
+        if (decoder_ascii_85(input, output) != 0) {
             return 1;
         }
-        
-    }else
-    {
-        std::cout<< "No arguments"<<std::endl;
-        return 0;
+    } else {
+        if (encoder_ascii_85(input, output) != 0) {
+            return 1;
+        }
     }
-        
-    //Encode/decode process     
-    if (decodeMode)
-    {
-        decoder_ascii_85(std::cin, std::cout);
-        std::cout<<"\n";
-    } else
-    {
-        encoder_ascii_85(std::cin, std::cout);
-        std::cout<<"\n";
-    }
+    
+    // Print the result
+    std::cout << output.str() << std::endl;
     
     return 0;
 }

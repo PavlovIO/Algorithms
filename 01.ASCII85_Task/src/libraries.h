@@ -4,6 +4,8 @@
 #ifndef LIBRARIES_H
 #define LIBRARIES_H
 #include <iostream>
+#include <sstream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include <stdexcept>
