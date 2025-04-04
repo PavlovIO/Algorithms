@@ -9,8 +9,8 @@ ASCII85 encoder/decoder working in terminal
 make all
 ## Run
 Terminal input
-./run.sh [-e (encode) | -d (decode)]
+./run.sh (-e (encode) | -d (decode))
 File input
-./run.sh [-e (encode) | -d (decode)] [--file <filename>]
+./run.sh (-e (encode) | -d (decode)) (--file <filename>)
 #Clean
 make cleanall
