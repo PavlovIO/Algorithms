@@ -11,6 +11,6 @@ make all
 Terminal input
 ./run.sh (-e (encode) | -d (decode))
 File input
-./run.sh (-e (encode) | -d (decode)) (--file <filename>)
-#Clean
+./run.sh [-e (encode) | -d (decode)] [--file filename]
+## Clean
 make cleanall
