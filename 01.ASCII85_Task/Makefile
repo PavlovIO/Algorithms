@@ -65,7 +65,7 @@ runtest: $(TARGET_TST)
 
 # Форматирование кода
 format:
-	find src/ -name '*.cpp' -exec astyle --options=style.astylerc {} \;
-	find tests/ -name '*.cpp' -exec astyle --options=style.astylerc {} \;
+	find ./src/ -name '*.cpp' -exec astyle --options=style.astylerc {} \;
+	find ./tests/ -name '*.cpp' -exec astyle --options=style.astylerc {} \;
 
 .PHONY: all setup test clean cleanall run runtest format

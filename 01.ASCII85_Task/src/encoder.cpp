@@ -9,7 +9,7 @@ int encoder_ascii_85(std::istream &input, std::ostream &output)
     std::vector<char> outputData;
     std::vector<unsigned char> buffer;
     char ch;
-    
+
     while (input.get(ch))
     {
         buffer.push_back(static_cast<unsigned char>(ch));
@@ -23,7 +23,7 @@ int encoder_ascii_85(std::istream &input, std::ostream &output)
                 num %= powers[i];
             }
             buffer.clear();
-        } 
+        }
     }
     if (!buffer.empty())
     {
@@ -41,6 +41,6 @@ int encoder_ascii_85(std::istream &input, std::ostream &output)
         }
     }
     output.write(outputData.data(), outputData.size());
-    output << "~>";  
-    return 0;  
+    output << "~>";
+    return 0;
 }

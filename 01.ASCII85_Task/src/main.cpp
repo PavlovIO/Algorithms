@@ -15,7 +15,7 @@ int main( int argc, char* argv[])
     std::string input_str = argv[2];
     std::string usefile_str = argv[3];
     bool usefile = (usefile_str == "1" || usefile_str == "true");
-    
+
     std::string result = ascii85(input_str,mode,usefile);
     std::cout << result << std::endl;
 }
