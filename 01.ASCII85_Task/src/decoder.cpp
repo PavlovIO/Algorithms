@@ -3,43 +3,60 @@
 */
 #include "ascii85.h"
 
-int decoder_ascii_85(std::istream &input, std::ostream &output) {
+int decoder_ascii_85(std::istream &input, std::ostream &output)
+{
     const uint32_t powers[] = {85*85*85*85, 85*85*85, 85*85, 85, 1};  // Старшие разряды сначала!
     std::vector<unsigned char> buffer;
     std::vector<char> outputData;
     char ch;
-    
-    while (input.get(ch)) {
-        if (ch == '~') {
-            if (input.peek() == '>') 
+
+    while (input.get(ch))
+    {
+        if (ch == '~')
+        {
+            if (input.peek() == '>')
             {
                 input.get(ch);  // Пропускаем '>'
                 break;
-            } else 
+            }
+            else
             {
                 std::cerr << "Invalid ASCII85 termination\n";
                 return 1;
             }
         }
-
-        if (ch >= '!' && ch <= 'u') 
+        /*
+        if (ch == '\\')
+        {
+            if (input.peek() == '"')
+            {
+                continue;
+            } else
+            {
+                std::cerr << "Invalid ASCII85 termination\n";
+                return 1;
+            }
+        }
+        */
+        if (ch >= '!' && ch <= 'u')
         {
             buffer.push_back(ch);
-        } else if (ch != ' ' && ch != '\n' && ch != '\r' && ch != '\t') 
+        }
+        else if (ch != ' ' && ch != '\n' && ch != '\r' && ch != '\t')
         {
             std::cerr << "Invalid ASCII85 character: '" << ch << "'\n";
             return 1;
         }
 
-        if (buffer.size() == 5) 
+        if (buffer.size() == 5)
         {
             uint32_t num = 0;
-            for (int i = 0; i < 5; ++i) 
+            for (int i = 0; i < 5; ++i)
             {
                 num += (buffer[i] - 33) * powers[i];
             }
 
-            for (int i = 3; i >= 0; --i) 
+            for (int i = 3; i >= 0; --i)
             {
                 outputData.push_back((num >> (8 * i)) & 0xFF);
             }
@@ -48,17 +65,17 @@ int decoder_ascii_85(std::istream &input, std::ostream &output) {
     }
 
     // Обработка остатка (паддинг)
-    if (!buffer.empty()) 
+    if (!buffer.empty())
     {
         uint32_t num = 0;
         int s = buffer.size();
-        
+
         for (int i = 0; i < 5 - s; ++i)
         {
             buffer.push_back('u');
         }
-        
-        for (int i = 0; i < 5; ++i) 
+
+        for (int i = 0; i < 5; ++i)
         {
             num += (buffer[i] - 33) * powers[i];
         }
