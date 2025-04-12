@@ -5,7 +5,7 @@
 #include<gtest/gtest.h>
 
 // Тест кодирования строки "Hello"
-TEST(Ascii85Test, EncodeHello)
+TEST(Ascii85Test, EncodeString)
 {
     std::string input = "Hello";
     std::string expected_start = "87cURDZ"; // ASCII85 код "Hello" начинается с этого
@@ -16,7 +16,7 @@ TEST(Ascii85Test, EncodeHello)
 }
 
 // Тест декодирования обратно
-TEST(Ascii85Test, DecodeHello)
+TEST(Ascii85Test, DecodeString)
 {
     std::string result = ascii85("87cURD]i,\"Ebo7~>", "-d", false);
     ASSERT_EQ(result, "Hello World");
@@ -41,7 +41,7 @@ TEST(Ascii85Test, InvalidCharDecode)
 }
 
 // Тест кодирования строки с картонным вводом
-TEST(Ascii85Test, EncodeHelloWithMockInput)
+TEST(Ascii85Test, EncodeStringWithMockInput)
 {
     std::string input_str = "Hi my name is Ilya";
     std::istringstream input(input_str);
@@ -57,7 +57,7 @@ TEST(Ascii85Test, EncodeHelloWithMockInput)
 }
 
 // Тест декодирования строки с картонным вводом
-TEST(Ascii85Test, DecodeHelloWithMockInput)
+TEST(Ascii85Test, DecodeStringWithMockInput)
 {
     std::string input_str = "87cURD]j7BEbo80~>";
     std::istringstream input(input_str);
