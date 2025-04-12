@@ -6,43 +6,16 @@
 int main( int argc, char* argv[])
 {
     //Checking for input
-    if (argc != 3) {
-        std::cerr << "Usage: " << argv[0] << " [-e (encode) | -d (decode)] <string>" << std::endl;
+    if (argc != 4)
+    {
+        std::cerr << "Usage: ./output [-e|-d] <string_or_file> <bool>(usefile)";
         return 1;
     }
-    
-    // Determine mode and input string
     std::string mode = argv[1];
     std::string input_str = argv[2];
-    bool decodeMode = false;
-
-    if (mode == "-d") {
-        decodeMode = true;
-    } else if (mode == "-e") {
-        decodeMode = false;
-    } else {
-        std::cerr << "Usage: " << argv[0] << " [-e (encode) | -d (decode)] <string>" << std::endl;
-        return 1;
-    }
+    std::string usefile_str = argv[3];
+    bool usefile = (usefile_str == "1" || usefile_str == "true");
     
-    // Use stringstream for input and output
-    std::stringstream input(input_str);
-    std::stringstream output;
-
-
-    // Encode or decode based on mode
-    if (decodeMode) {
-        if (decoder_ascii_85(input, output) != 0) {
-            return 1;
-        }
-    } else {
-        if (encoder_ascii_85(input, output) != 0) {
-            return 1;
-        }
-    }
-    
-    // Print the result
-    std::cout << output.str() << std::endl;
-    
-    return 0;
+    std::string result = ascii85(input_str,mode,usefile);
+    std::cout << result << std::endl;
 }
