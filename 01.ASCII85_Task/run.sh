@@ -7,7 +7,7 @@ fi
 
 mode="$1"
 input=""
-use_file=false
+use_file=0
 filename=""
 
 # Check for --file option
@@ -16,7 +16,7 @@ if [ "$2" = "--file" ]; then
         echo "Error: --file requires a filename"
         exit 1
     fi
-    use_file=true
+    use_file=1
     filename="$3"
 fi
 
@@ -26,12 +26,12 @@ if [ "$mode" != "-e" ] && [ "$mode" != "-d" ]; then
     exit 1
 fi
 
-if [ "$use_file" = true ]; then
+if [ "$use_file" = 1 ]; then
     if [ ! -f "$filename" ]; then
         echo "Error: File '$filename' not found"
         exit 1
     fi
-    input=$(cat "$filename")
+    input="$filename"
 else
     echo "Enter the string to $mode:"
     read -r input
@@ -42,4 +42,4 @@ if [ -z "$input" ]; then
     exit 1
 fi
 
-./output "$mode" "$input"
+./output "$mode" "$input" "$use_file"
