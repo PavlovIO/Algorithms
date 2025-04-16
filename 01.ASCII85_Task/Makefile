@@ -1,7 +1,7 @@
 # Переменные
 CXX = g++
-CXXFLAGS = -Wall -Werror -Wpedantic -g -std=c++23 -I./src
-LDFLAGS = -lgtest -lgtest_main -pthread
+CXXFLAGS = -Wall -Werror -Wpedantic -g -std=c++23 -I./src -I./submodules/pybind11/include/pybind11 $(python3 -m pybind11 --includes) $(shell python3-config --includes)
+LDFLAGS = -lgtest -lgtest_main -pthread $(shell python3-config --ldflags) $(python3-config --extension-suffix)
 
 # Директории
 PREF_SRC = ./src/
