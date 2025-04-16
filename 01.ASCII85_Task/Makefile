@@ -40,7 +40,7 @@ $(PREF_OBJ)%.o: $(PREF_SRC)%.cpp | $(PREF_OBJ)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Сборка и запуск тестов
-build: $(TARGET_TST)
+build: $(TARGET_TST) all
 
 $(TARGET_TST): $(filter-out $(PREF_OBJ)main.o, $(OBJ)) $(TST_OBJ)
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
