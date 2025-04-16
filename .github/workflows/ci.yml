@@ -75,4 +75,4 @@ jobs:
         run: |
           cd ${{ matrix.exercise }}
           make runtest
-          python3 testpy.py
+          python3 tests/testpy.py
